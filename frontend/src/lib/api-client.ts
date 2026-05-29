@@ -9,11 +9,7 @@ import { apiPaths } from '@/constants/api-paths'
 export function createBrowserApiClient(
   getToken?: () => Promise<string | null>
 ): AxiosInstance {
-    const defaultBaseUrl = typeof window !== 'undefined' 
-        ? `${window.location.protocol}//${window.location.hostname}:5001`
-        : "http://localhost:5001";
-        
-    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || defaultBaseUrl;
+    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://synctalk-backend-ky7f.onrender.com";
 
     const client = axios.create({
         baseURL,

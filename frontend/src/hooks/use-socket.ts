@@ -30,7 +30,7 @@ export function useSocket(): UseSocketResult {
     }
 
     if (!socketInstance) {
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5001";
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://synctalk-backend-ky7f.onrender.com";
       socketInstance = io(baseUrl, {
         auth: { token },
         withCredentials: true,
