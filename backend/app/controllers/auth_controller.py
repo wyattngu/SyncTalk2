@@ -147,11 +147,12 @@ def get_users_with_status(current_user):
         days = hours // 24
         return f'{days}d ago'
 
+    from app.sockets.presence_manager import presence_manager
     return success_response(
         data=[{
             'id': u.id,
             'username': u.username,
-            'is_online': u.is_online,
-            'last_seen': format_last_seen(u.last_seen)
+            'is_online': presence_manager.is_user_online(u.id),
+            'last_seen': u.last_seen.isoformat() + 'Z' if u.last_seen else None,
         } for u in users if u.id != current_user.id]
     )
