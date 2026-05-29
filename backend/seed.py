@@ -257,7 +257,7 @@ REPLIES = [
     ("co-op",   "ethan",   "**Helldivers 2** if you want chaos. Otherwise Risk of Rain 2."),
     ("co-op",   "ivan",    "@charlie try Vermintide 2 — lovely 4-player coop."),
     # Gemini thread
-    ("Gemini",  "alice",   "How's the latency feel compared to Claude?"),
+    ("Gemini",  "alice",   "How's the latency feel compared to GPT-4o?"),
     ("Gemini",  "bob",     "Function calling docs are actually decent now."),
     ("Gemini",  "kevin",   "Beware rate limits on the free tier when you batch — got bitten last week."),
     ("Gemini",  "ethan",   "@kevin yeah, exponential backoff is mandatory."),
@@ -277,7 +277,7 @@ REPLIES = [
     ("Accessibility", "diana", "Ensure focus order matches visual order — RTL languages especially."),
     # Gemini vs GPT
     ("Gemini 2.5 Flash vs GPT", "alice",  "Cold start on Gemini is more variable in my testing."),
-    ("Gemini 2.5 Flash vs GPT", "george", "Anyone benchmarked Claude Haiku alongside? Curious where it lands."),
+    ("Gemini 2.5 Flash vs GPT", "george", "Anyone benchmarked Llama 4 alongside? Curious where it lands."),
     # Synthwave Friday
     ("Synthwave", "ethan",  "**FM-84 - Running In The Night** — a classic."),
     ("Synthwave", "alice",  "Nice. Adding to my Monday playlist."),
@@ -332,7 +332,7 @@ DM_HISTORY = [
     ("SyncBot", "alice", "Sure! Here's a quick summary of your open threads…"),
     ("alice", "diana",   "Did you see the new Tailwind v4 thread? Curious what you think."),
     ("diana", "alice",   "Yes! Migrating our design system this week."),
-    ("ethan", "bob",     "Thinking of a benchmark post on Claude Haiku — interested?"),
+    ("ethan", "bob",     "Thinking of a benchmark post on Llama 4 — interested?"),
     ("bob",   "ethan",   "Always interested. Send me the draft when ready."),
     ("hannah", "fiona",  "Got time to pair on the a11y audit Thursday?"),
     ("fiona", "hannah",  "Thursday afternoon works. I'll bring the screen reader."),
