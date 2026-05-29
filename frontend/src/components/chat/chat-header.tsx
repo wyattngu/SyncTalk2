@@ -7,35 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { ChatUser } from "@/services/chat";
 
-import { usePresenceStore } from "@/lib/presence-store";
-
 interface ChatHeaderProps {
   user: ChatUser | null;
   isBotChat: boolean;
 }
 
-function formatLastSeen(iso: string | null | undefined): string {
-  if (!iso) return "Offline";
-  const ms = Date.now() - new Date(iso).getTime();
-  const sec = Math.floor(ms / 1000);
-  if (sec < 60) return "Just now";
-  const min = Math.floor(sec / 60);
-  if (min < 60) return `${min}m ago`;
-  const hr = Math.floor(min / 60);
-  if (hr < 24) return `${hr}h ago`;
-  const days = Math.floor(hr / 24);
-  return `${days}d ago`;
-}
 
 export function ChatHeader({ user, isBotChat }: ChatHeaderProps) {
-  const { userStatuses } = usePresenceStore();
   const username = user?.username ?? "Conversation";
   const initial = (user?.username?.[0] || "?").toUpperCase();
-  
-  // Real-time status from store, fallback to initial props
-  const realTimeStatus = user?.id ? userStatuses[user.id] : null;
-  const isOnline = realTimeStatus ? realTimeStatus.is_online : !!user?.is_online;
-  const lastSeenStr = realTimeStatus ? realTimeStatus.last_seen : user?.last_seen;
+
+  const isOnline = !!user?.is_online;
 
   // The chat header username links to the public profile page so users can
   // view the other person's profile (and add as friend, etc.).
@@ -105,7 +87,7 @@ export function ChatHeader({ user, isBotChat }: ChatHeaderProps) {
                     isOnline ? "bg-success" : "bg-muted-foreground/40",
                   )}
                 />
-                {isOnline ? "Active now" : `Last seen: ${formatLastSeen(lastSeenStr)}`}
+                {isOnline ? "Active now" : null}
               </span>
             )}
           </div>
