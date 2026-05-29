@@ -28,6 +28,13 @@ export function ReactionBar({ targetType, targetId }: ReactionBarProps) {
     }
   }, [pickerOpen]);
 
+  useEffect(() => {
+    if (!pickerOpen) return;
+    const close = () => setPickerOpen(false);
+    window.addEventListener("scroll", close, true);
+    return () => window.removeEventListener("scroll", close, true);
+  }, [pickerOpen]);
+
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {reactions.map((group) => {
