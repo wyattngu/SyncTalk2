@@ -71,14 +71,12 @@ export function ChatHeader({ user, isBotChat }: ChatHeaderProps) {
               <Badge className="bg-primary-soft text-[10px] uppercase tracking-wider text-primary hover:bg-primary-soft">
                 AI · Gemini
               </Badge>
-            ) : (
-              {isOnline && (
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-success">
-                  <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                  Active now
-                </span>
-              )}
-            )}
+            ) : isOnline ? (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-success">
+                <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                Active now
+              </span>
+            ) : null}
           </div>
         </div>
       </div>
