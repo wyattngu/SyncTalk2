@@ -27,25 +27,7 @@ Tài khoản thử: `alice@synctalk.dev` / `Password123!`
 
 ---
 
-## Chạy bằng Docker (khuyến nghị)
-
-Yêu cầu: cài [Docker Desktop](https://www.docker.com/products/docker-desktop) và đảm bảo Docker đang chạy.
-
-```bash
-git clone https://github.com/wyattngu/SyncTalk.git
-cd SyncTalk
-docker compose up --build -d
-```
-
-Mở trình duyệt vào **http://localhost:3000**
-
-Lần đầu chạy, dữ liệu demo sẽ được tạo tự động. Dùng tài khoản `alice@synctalk.dev` / `Password123!` để đăng nhập ngay.
-
-Để tắt: `docker compose down`
-
----
-
-## Chạy thủ công (không dùng Docker)
+## Chạy local
 
 Yêu cầu: Node.js 20+, Python 3.12+, PostgreSQL đang chạy local.
 
