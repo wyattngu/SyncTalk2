@@ -77,10 +77,11 @@ def reset_online_status():
     with app.app_context():
         try:
             from app.models import User
-            User.query.update({User.is_online: False})
+            db.session.query(User).update({"is_online": False}, synchronize_session=False)
             db.session.commit()
-        except Exception:
-            pass
+            print('[startup] All users reset to offline.')
+        except Exception as e:
+            print(f'[startup] Could not reset online status: {e}', file=sys.stderr)
 
 # Run at import time so it fires under both `python run.py` and any WSGI
 # server that imports `app` from this module.
