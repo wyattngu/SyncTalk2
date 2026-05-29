@@ -84,7 +84,7 @@ export const tagsService = {
   },
 };
 
-export const usersService = {
+export const presenceService = {
   withStatus: async (): Promise<OnlineUser[]> => {
     const res = await browserClient.get("/api/auth/users/online");
     return res.data.data ?? [];

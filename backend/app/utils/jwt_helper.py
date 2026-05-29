@@ -45,11 +45,3 @@ def optional_token(f):
 
         return f(*args, current_user=user, **kwargs)
     return decorated
-
-
-def decode_token(token):
-    try:
-        payload = jwt.decode(token, current_app.config['JWT_SECRET_KEY'], algorithms=['HS256'])
-        return payload
-    except (jwt.ExpiredSignatureError, jwt.InvalidTokenError, Exception):
-        return None

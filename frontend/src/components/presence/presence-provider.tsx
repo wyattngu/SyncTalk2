@@ -5,7 +5,7 @@ import { useSocket } from "@/hooks/use-socket";
 import { ServerEvents } from "@/constants";
 import { usePresenceStore } from "@/lib/presence-store";
 import { useAuthStore } from "@/lib/auth-store";
-import { usersService } from "@/services/threads";
+import { presenceService } from "@/services/threads";
 
 export function PresenceProvider({ children }: { children: React.ReactNode }) {
   const { socket, connected } = useSocket();
@@ -15,7 +15,7 @@ export function PresenceProvider({ children }: { children: React.ReactNode }) {
   // Load initial statuses from API when authenticated
   useEffect(() => {
     if (!token) return;
-    usersService.withStatus().then((users) => {
+    presenceService.withStatus().then((users) => {
       users.forEach((u) => updateUserStatus(u.id, u.is_online, u.last_seen));
     }).catch(() => {});
   }, [token, updateUserStatus]);

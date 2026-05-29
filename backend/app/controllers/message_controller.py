@@ -3,7 +3,6 @@
 from flask import Blueprint, request
 from app import socketio
 from app.services.message_service import MessageService
-from app.repositories.message_repository import MessageRepository
 from app.utils.jwt_helper import token_required
 from app.utils.response import success_response, error_response
 
@@ -102,6 +101,7 @@ def save_ai_reply(current_user):
     # Store with sender_id = context_user_id so it naturally appears in the
     # conversation between current_user and context_user, while is_ai=True
     # tells the frontend to render it as an AI bubble.
+    from app.repositories.message_repository import MessageRepository
     repo = MessageRepository()
     msg = repo.create(
         sender_id=context_user_id,
