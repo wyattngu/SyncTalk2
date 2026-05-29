@@ -1,0 +1,3 @@
+#!/bin/sh
+python -c "from app import create_app, db; app=create_app(); app.app_context().push(); db.create_all()"
+exec python run.py

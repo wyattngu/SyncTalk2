@@ -1,0 +1,281 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * SyncTalk — Material 3 inspired light theme
+ *
+ * Palette:
+ *   primary               #3525cd  deep indigo (CTAs, links, focus)
+ *   primary-container     #4f46e5  lighter indigo (active states)
+ *   surface / background  #fcf8ff  warm lavender (page bg)
+ *   surface-container-lowest  #ffffff  card surface
+ *   surface-container-low     #f5f2ff
+ *   surface-container         #f0ecf9
+ *   surface-container-high    #eae6f4
+ *   surface-variant           #e4e1ee  (borders/dividers)
+ *   outline-variant           #c7c4d8  (stronger borders)
+ *   on-surface                #1b1b24  text
+ *   on-surface-variant        #464555  muted text
+ *
+ * Type:
+ *   Manrope  for h1/h2/h3 (heavy weights)
+ *   Inter    for body text + buttons + labels
+ *
+ * Icons: Material Symbols Outlined (loaded via CDN in layout)
+ */
+:root {
+  --radius: 0.5rem;
+
+  /* Surfaces */
+  --background:                  #fcf8ff;
+  --foreground:                  #1b1b24;
+
+  --card:                        #ffffff;
+  --card-foreground:             #1b1b24;
+  --card-muted:                  #f5f2ff;
+
+  --surface-container-low:       #f5f2ff;
+  --surface-container:           #f0ecf9;
+  --surface-container-high:      #eae6f4;
+  --surface-container-highest:   #e4e1ee;
+  --surface-variant:             #e4e1ee;
+  --inverse-surface:             #302f39;
+  --inverse-on-surface:          #f3effc;
+
+  --popover:                     #ffffff;
+  --popover-foreground:          #1b1b24;
+
+  /* Primary */
+  --primary:                     #3525cd;   /* M3 primary */
+  --primary-hover:               #4d44e3;   /* surface-tint */
+  --primary-foreground:          #ffffff;
+  --primary-container:           #4f46e5;
+  --on-primary-container:        #dad7ff;
+  --primary-soft:                #e2dfff;   /* primary-fixed */
+  --primary-fixed-dim:           #c3c0ff;
+  --on-primary-fixed:            #0f0069;
+
+  /* Accent (kept as a soft secondary blue for highlights) */
+  --accent:                      #4d44e3;
+  --accent-foreground:           #ffffff;
+  --accent-soft:                 #e2dfff;
+
+  /* Secondary */
+  --secondary:                   #f0ecf9;   /* surface-container, used as button bg */
+  --secondary-foreground:        #1b1b24;
+  --secondary-container:         #dae2fd;
+  --on-secondary-container:      #5c647a;
+
+  /* Muted */
+  --muted:                       #f0ecf9;
+  --muted-foreground:            #464555;   /* on-surface-variant */
+
+  --success:                     #16a34a;
+  --success-soft:                #dcfce7;
+
+  --destructive:                 #ba1a1a;   /* M3 error */
+  --destructive-foreground:      #ffffff;
+  --destructive-soft:            #ffdad6;   /* error-container */
+
+  --border:                      #e4e1ee;   /* surface-variant */
+  --border-strong:               #c7c4d8;   /* outline-variant */
+  --input:                       #c7c4d8;
+  --outline:                     #777587;
+  --ring:                        #4d44e3;
+
+  --chart-1: #3525cd;
+  --chart-2: #4d44e3;
+  --chart-3: #16a34a;
+  --chart-4: #f97316;
+  --chart-5: #facc15;
+
+  --sidebar:                     #ffffff;
+  --sidebar-foreground:          #1b1b24;
+  --sidebar-primary:             #3525cd;
+  --sidebar-primary-foreground:  #ffffff;
+  --sidebar-accent:              #e2dfff;       /* primary-fixed for active item */
+  --sidebar-accent-foreground:   #3525cd;
+  --sidebar-border:              #e4e1ee;
+  --sidebar-ring:                #4d44e3;
+
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.04);
+  --shadow-md: 0 10px 25px -5px rgb(15 23 42 / 0.05);
+  --shadow-lg: 0 20px 40px -10px rgb(15 23 42 / 0.08);
+}
+
+.dark {
+  --background: #0b1220;
+  --foreground: #e4e1ee;
+  --card: #111a2e;
+  --card-foreground: #f8fafc;
+  --card-muted: #0f1729;
+  --surface-container-low: #0f1729;
+  --surface-container: #111a2e;
+  --surface-container-high: #1a2540;
+  --surface-container-highest: #243154;
+  --surface-variant: #1e293b;
+  --popover: #111a2e;
+  --popover-foreground: #f8fafc;
+  --primary: #c3c0ff;
+  --primary-hover: #dad7ff;
+  --primary-foreground: #0f0069;
+  --primary-soft: rgba(195,192,255,0.12);
+  --accent: #c3c0ff;
+  --accent-foreground: #0f0069;
+  --accent-soft: rgba(195,192,255,0.12);
+  --secondary: #1e293b;
+  --secondary-foreground: #e2e8f0;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --border: #1e293b;
+  --border-strong: #334155;
+  --input: #1e293b;
+  --ring: #c3c0ff;
+}
+
+@theme inline {
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui;
+  --font-display: "Manrope", "Manrope Fallback", ui-sans-serif, system-ui;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-muted: var(--card-muted);
+
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-variant: var(--surface-variant);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-soft: var(--destructive-soft);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-outline: var(--outline);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01", "ss03";
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  ::selection {
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+  /* Headings use Manrope */
+  h1, h2, h3 {
+    font-family: "Manrope", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  /* Brand gradient kept for accents */
+  .gradient-brand {
+    background: linear-gradient(135deg, #3525cd 0%, #4d44e3 100%);
+  }
+  .gradient-brand-text {
+    background: linear-gradient(135deg, #3525cd 0%, #4d44e3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ring-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+  .card-surface {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Material Symbols Outlined helpers */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .icon-fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Display heading helper */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* highlight.js code block tweaks */
+  .hljs {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+}

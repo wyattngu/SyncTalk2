@@ -1,0 +1,26 @@
+# SyncTalk/.gitignore
+
+# Environment
+.env
+backend/.env
+frontend/.env.local
+
+# Python
+backend/venv/
+__pycache__/
+backend/__pycache__/
+*.pyc
+backend/*.pyc
+
+# Node
+frontend/node_modules/
+frontend/.next/
+*.tsbuildinfo
+
+# Docker
+postgres_data/
+
+# Local tooling
+.claude/
+.idea/
+.logs/

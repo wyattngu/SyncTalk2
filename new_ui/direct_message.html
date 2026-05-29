@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SyncTalk - Direct Messages</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1b24",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-secondary-container": "#5c647a",
+                        "primary-fixed": "#e2dfff",
+                        "outline": "#777587",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#dad7ff",
+                        "inverse-on-surface": "#f3effc",
+                        "primary": "#3525cd",
+                        "surface-tint": "#4d44e3",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-variant": "#e4e1ee",
+                        "surface-container-high": "#eae6f4",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#7e3000",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "inverse-surface": "#302f39",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#dae2fd",
+                        "outline-variant": "#c7c4d8",
+                        "on-surface-variant": "#464555",
+                        "on-error-container": "#93000a",
+                        "secondary": "#565e74",
+                        "on-surface": "#1b1b24",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#131b2e",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4f46e5",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-dim": "#dcd8e5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#351000",
+                        "secondary-fixed": "#dae2fd",
+                        "surface-container": "#f0ecf9",
+                        "background": "#fcf8ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e4e1ee",
+                        "surface-bright": "#fcf8ff",
+                        "surface": "#fcf8ff",
+                        "on-tertiary-container": "#ffd2be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "xs": "4px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "button": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "button": ["15px", {"lineHeight": "1", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md h-screen overflow-hidden flex antialiased">
+<!-- Shared Component: SideNavBar -->
+<nav class="bg-surface-container-lowest h-screen w-64 border-r border-outline-variant flex flex-col fixed left-0 top-0 py-md px-sm space-y-base z-50">
+<div class="px-sm mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center font-h3 text-h3">
+                    S
+                </div>
+<div>
+<h1 class="font-h3 text-h3 text-on-surface text-lg font-bold">SyncTalk HQ</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Internal Workspace</p>
+</div>
+</div>
+</div>
+<button class="mx-sm mb-base flex items-center justify-center gap-sm bg-primary text-on-primary font-button text-button py-sm px-md rounded-lg hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+            Compose
+        </button>
+<div class="flex-1 space-y-xs overflow-y-auto">
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-sm px-sm py-sm text-primary font-button text-button bg-surface-container-low rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble" data-weight="fill" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span>Messages</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-body-sm text-body-sm">Teams</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="tag">tag</span>
+<span class="font-body-sm text-body-sm">Channels</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-body-sm text-body-sm">Files</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-sm text-body-sm">Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Layout -->
+<div class="flex-1 flex ml-64 bg-surface h-full">
+<!-- Conversation List (Left Column) -->
+<aside class="w-[340px] border-r border-outline-variant bg-surface-container-lowest flex flex-col h-full flex-shrink-0">
+<div class="p-md border-b border-outline-variant">
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-h3 text-h3 text-on-surface">Direct Messages</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-xl pr-sm py-sm bg-surface-container border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Search messages..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-base space-y-xs">
+<!-- Active Conversation Item -->
+<div class="flex items-start gap-sm p-sm rounded-lg bg-surface-container-low border border-outline-variant cursor-pointer transition-colors relative">
+<div class="relative">
+<img alt="Sarah Jenkins profile" class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="professional headshot of young woman with dark hair smiling against light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBoVFwUs9Zq5s9dgeE-EQxdIB7BmGHiR-A_NLXQQGLA6AN9oJHfyRZ-1VxbcXUt7Qz_qkx-1AAwWqzARgbL-TQf7Jm37-Q6Fr_di8dXaGpR04CdhWCIAirLHCWtlrmlHzyKcDFiVcNXK2ZPk3MKvhdbXnY7j55rXJuEBQDcWZc7aDbnL1mijgA3HckDFyHPqkpGVn9yGcKABa0elcIDwZsusg57Y4kz20dtDYs9tO_QUAypEwtVU8H_WSJFGvAidS9qlHE9WDQphcU"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-surface-container-lowest rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline justify-between">
+<h4 class="font-button text-button text-on-surface truncate">Sarah Jenkins</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">10:42 AM</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary truncate">Typing...</p>
+</div>
+</div>
+<!-- Inactive Conversation Items -->
+<div class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container transition-colors cursor-pointer relative">
+<div class="relative">
+<img alt="Michael Chen profile" class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="professional headshot of asian man with glasses looking thoughtful" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf0tpRoZz4fKxz6fD4ZkJgGdFSiN91NoQTXXxSz72CJ0B4Jkv9ym1a6uSc0WNRnDY8lwkVSZKb9vVUimaJWFCTSZQxSI10SkmhJHlWqTgy-jeMk5tdw355eRdgZvKKVPfr59FPBHEvKcLp70_D3HO72qF6S5ibgkHoFRblOlWWbxd2CORcoHpfCRbaf8fvqWkqc1pBzH_gDTcSNPscb3VW5L8aPf75juaoaV2sSAs5P9rv2nIMycfxbiuiAAfJ9ArRUs5ahYPXvtKu"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline justify-between">
+<h4 class="font-button text-button text-on-surface truncate">Michael Chen</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">The Q3 report looks solid. Let's review tomorrow.</p>
+</div>
+<div class="w-2 h-2 bg-primary rounded-full absolute top-1/2 -translate-y-1/2 right-sm"></div>
+</div>
+<div class="flex items-start gap-sm p-sm rounded-lg hover:bg-surface-container transition-colors cursor-pointer">
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-surface-variant text-on-surface flex items-center justify-center font-button text-button border border-outline-variant">
+                            EM
+                        </div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-surface-container-lowest rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline justify-between">
+<h4 class="font-button text-button text-on-surface truncate">Elena Martinez</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Mon</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Could you share the updated design files?</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Chat Area (Main Column) -->
+<main class="flex-1 flex flex-col h-full bg-surface-container-lowest">
+<!-- Chat Header -->
+<header class="h-[72px] px-md border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest flex-shrink-0">
+<div class="flex items-center gap-sm">
+<img alt="Sarah Jenkins profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="professional headshot of young woman with dark hair smiling against light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfw98UTRQInlocoQ8lUgo7oQXFVHwe-hKAbDvXcKCFAzXfSwmGg38hckPLPFeDaQ3OaY2Y_w7W0aCZNYm6Lcfz0bggNXotmUxKbsfK6-4CjgFKEefl2J2Dazi-kbxmdz--qyiDVp8A8eTvNpuBnB9W92PdR0lNT2BjaW2rZr5qJ5muaOhhnj-WDROLkKrmifmPPdzIOvsnGTPRJcwTXip-76_KOzcbdZPLSGiIm1h0_8K-6dvFj4FFpvbw8HaRxpEXDQbkLsKwHjao"/>
+<div>
+<h2 class="font-button text-button text-on-surface">Sarah Jenkins</h2>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 bg-green-500 rounded-full"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active Now</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors border border-outline-variant">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</header>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-md space-y-lg bg-surface">
+<!-- Date Separator -->
+<div class="flex justify-center">
+<span class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps px-sm py-xs rounded-full">Today</span>
+</div>
+<!-- Message: Other -->
+<div class="flex items-end gap-sm max-w-[80%]">
+<img alt="Sarah Jenkins" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="professional headshot of young woman with dark hair smiling against light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9D9bJh_XhB6Yn8rNR52fhXWl_P2NhwmrNMH7J6wJP9mSsyc_ToP8Bq22aOFMBwkpLNgk7o6sZpTd3wIuFcDPo1UGOnkvmTyBnMRNQCpxpn3XGFmkd6a1Kqox5hZxCwdSs97lXa3j9eXq54pigW5YB-zgT6y695lz9HTBvWE5R4dbqorTU6zKL6jGXKljo_RB94VOBWAsapVtMMobkS8Un1q-NJUO2D8XOCfz0SU2wRiykcv33aNKQIaCsdIaXTkfumCfitz75I1Fm"/>
+<div class="flex flex-col gap-1">
+<div class="bg-surface-container text-on-surface p-sm rounded-2xl rounded-bl-none border border-outline-variant font-body-md text-body-md shadow-sm">
+                            Hey! I've reviewed the latest wireframes. They look much closer to what we discussed in the sync.
+                        </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant ml-1">10:38 AM</span>
+</div>
+</div>
+<!-- Message: Self -->
+<div class="flex items-end gap-sm max-w-[80%] ml-auto flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-button text-button">
+                        S
+                    </div>
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary text-on-primary p-sm rounded-2xl rounded-br-none font-body-md text-body-md shadow-sm">
+                            Great! Glad the adjustments hit the mark. I'm wrapping up the final visual polish now.
+                        </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mr-1">10:40 AM</span>
+</div>
+</div>
+<!-- Message: Other (Typing) -->
+<div class="flex items-end gap-sm max-w-[80%]">
+<img alt="Sarah Jenkins" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="professional headshot of young woman with dark hair smiling against light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN-gxq8YOcAGPwl1Sv-sou8ZBsk-RHjzFasGKu4Bh18woDAnKCGnByEmRNY3rbayytXGSfAk8abD9Iu9-WD86BJkXhlPAc4XB5hqmJfeWdNXX2TgJBI0em0sKYQFv7LdK4sexubccaLQ3k6eAfF5GQq35YWKVfmfegoYtM1Vez1FksQH8nWlXfZBlQnMlkogTn9xot_sFM7Z9A9i6GxE1yRG7EcfGEZiNRfJ13zzqU3mAMEgqZ9M6jpp9TBnmZS1yF0TAPdNKUIqqq"/>
+<div class="bg-surface-container p-sm rounded-2xl rounded-bl-none border border-outline-variant shadow-sm flex items-center gap-1 h-[42px] px-md">
+<div class="w-2 h-2 bg-on-surface-variant rounded-full animate-bounce"></div>
+<div class="w-2 h-2 bg-on-surface-variant rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+<div class="w-2 h-2 bg-on-surface-variant rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+</div>
+</div>
+</div>
+<!-- Message Input Area -->
+<div class="p-md bg-surface-container-lowest border-t border-outline-variant flex-shrink-0">
+<div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<!-- Toolbar -->
+<div class="px-sm py-xs border-b border-outline-variant bg-surface-container-low flex items-center gap-xs">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">format_bold</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">format_italic</span>
+</button>
+<div class="w-[1px] h-4 bg-outline-variant mx-1"></div>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">sentiment_satisfied</span>
+</button>
+</div>
+<!-- Textarea -->
+<textarea class="w-full p-sm bg-transparent border-none resize-none font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:ring-0" placeholder="Type a message... Use @sync to mention bot" rows="2"></textarea>
+<!-- Footer -->
+<div class="px-sm py-xs flex justify-between items-center bg-surface">
+<div class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps cursor-pointer hover:bg-surface-variant transition-colors">
+<span class="text-primary font-bold">@</span>
+                            sync
+                        </div>
+<button class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-tint transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+<div class="mt-xs text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Press Enter to send, Shift+Enter for new line</span>
+</div>
+</div>
+</main>
+</div>
+</body></html>

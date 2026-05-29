@@ -1,0 +1,72 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: SyncTalk
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Flask Backend
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend:/app
+    environment:
+      FLASK_APP: run.py
+      FLASK_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: SyncTalk
+      DB_USER: postgres
+      DB_PASSWORD: 1
+      JWT_SECRET_KEY: synctalk_jwt_secret_change_in_production
+      SECRET_KEY: synctalk_secret_change_in_production
+      JWT_ACCESS_TOKEN_EXPIRES: 3600
+      FRONTEND_URL: http://localhost:3000,http://localhost:4000
+      GEMINI_API_KEY: AIzaSyDGIYeDLBtayUZevddt5qQCB8IrlKs8oVg
+      CLOUDINARY_CLOUD_NAME: dxhlxhjxw
+      CLOUDINARY_API_KEY: "332151696731723"
+      CLOUDINARY_API_SECRET: qjb9stGVROZkPeOStZz2J8j5e8w
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python -c 'from app import create_app, db; app=create_app(); app.app_context().push(); db.create_all()' && python run.py"
+
+  # Next.js Frontend
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:4000"
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:5001
+      NEXT_PUBLIC_SOCKET_URL: http://localhost:5001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

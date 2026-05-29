@@ -1,0 +1,68 @@
+services:
+  - type: web
+    name: synctalk-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: singapore
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: DB_HOST
+        fromDatabase:
+          name: synctalk-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: synctalk-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: synctalk-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: synctalk-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: synctalk-db
+          property: password
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ACCESS_TOKEN_EXPIRES
+        value: "3600"
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dxhlxhjxw
+      - key: CLOUDINARY_API_KEY
+        value: "332151696731723"
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: https://synctalk-frontend-qaiz.onrender.com
+
+  - type: web
+    name: synctalk-frontend
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    plan: free
+    region: singapore
+    rootDir: frontend
+    envVars:
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://synctalk-backend-omle.onrender.com
+      - key: NEXT_PUBLIC_SOCKET_URL
+        value: https://synctalk-backend-omle.onrender.com
+
+databases:
+  - name: synctalk-db
+    databaseName: synctalk
+    user: synctalk
+    plan: free
+    region: singapore
