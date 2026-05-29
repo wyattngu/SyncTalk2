@@ -35,13 +35,12 @@ class MessageService:
             image_url=image_url
         )
 
-        if receiver_id:
-            notif_repo.create(
-                user_id=receiver_id,
-                type='message',
-                message='You have a new message',
-                reference_id=sender_id
-            )
+        notif_repo.create(
+            user_id=receiver_id,
+            type='message',
+            message='You have a new message',
+            reference_id=sender_id
+        )
 
         return message, None
 

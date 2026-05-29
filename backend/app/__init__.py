@@ -29,7 +29,7 @@ def create_app():
     CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
     socketio.init_app(app, cors_allowed_origins=allowed_origins, async_mode="eventlet")
 
-    from app import models
+    from app import models  # side-effect: registers all ORM models with SQLAlchemy metadata
 
     from app.controllers.auth_controller import auth_bp
     from app.controllers.thread_controller import thread_bp

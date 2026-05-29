@@ -8,27 +8,36 @@ class PresenceManager:
     def __init__(self):
         # Maps userId -> set of socketIds
         self.user_connections = {}
+        # Maps socketId -> userId for reliable disconnect lookup
+        self.sid_to_user = {}
 
     def add_connection(self, user_id, socket_id):
+        self.sid_to_user[socket_id] = user_id
+
         if user_id not in self.user_connections:
             self.user_connections[user_id] = set()
             # First connection: mark as online in DB
             self._update_user_status(user_id, True)
-        
+
         self.user_connections[user_id].add(socket_id)
         self.broadcast_status(user_id, True)
         self.broadcast_online_count()
 
     def remove_connection(self, user_id, socket_id):
+        self.sid_to_user.pop(socket_id, None)
+
         if user_id in self.user_connections:
             self.user_connections[user_id].discard(socket_id)
-            
+
             if not self.user_connections[user_id]:
                 # Last connection closed: mark as offline in DB
                 del self.user_connections[user_id]
                 self._update_user_status(user_id, False)
                 self.broadcast_status(user_id, False)
                 self.broadcast_online_count()
+
+    def get_user_for_sid(self, socket_id):
+        return self.sid_to_user.get(socket_id)
 
     def get_online_count(self):
         return len(self.user_connections)

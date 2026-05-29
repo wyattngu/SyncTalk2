@@ -17,7 +17,7 @@ for stream in (sys.stdout, sys.stderr):
         pass
 
 from dotenv import load_dotenv
-from app import create_app, socketio
+from app import create_app, socketio, db
 
 load_dotenv()
 

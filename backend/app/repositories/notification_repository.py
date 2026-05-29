@@ -26,8 +26,9 @@ class NotificationRepository:
                 'is_read': notification.is_read,
                 'created_at': notification.created_at.isoformat() + 'Z'
             }, room=user_id)
-        except Exception:
-            pass
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(f"[notification] socket emit failed: {e}")
 
         return notification
 

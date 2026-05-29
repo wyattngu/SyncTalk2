@@ -30,7 +30,7 @@ def on_authenticate(data):
 
 @socketio.on('disconnect')
 def on_disconnect():
-    user_id = session.get('user_id')
+    user_id = presence_manager.get_user_for_sid(request.sid)
     if user_id:
         presence_manager.remove_connection(user_id, request.sid)
         socketio.emit('user_offline', {'user_id': user_id})

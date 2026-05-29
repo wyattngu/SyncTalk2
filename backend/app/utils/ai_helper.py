@@ -51,7 +51,6 @@ def get_client_or_model(model_name):
     return None
 
 def generate_with_retry(prompt, history=None, generation_config=None):
-    global GEMINI_MODEL
     current_model = GEMINI_MODEL
     
     last_error_msg = "Lỗi AI không xác định."
@@ -86,7 +85,6 @@ def generate_with_retry(prompt, history=None, generation_config=None):
                 if current_model == "gemini-3-flash-preview":
                     logger.warning("Quota hit for Gemini 3, trying Gemini 2.0...")
                     current_model = "gemini-2.0-flash"
-                    GEMINI_MODEL = "gemini-2.0-flash"
                     continue
                 return None, "Bạn đã dùng hết hạn mức AI trong ngày."
             
@@ -97,7 +95,6 @@ def generate_with_retry(prompt, history=None, generation_config=None):
             logger.error(f"Model not found: {e}")
             if current_model == "gemini-3-flash-preview":
                 current_model = "gemini-2.0-flash"
-                GEMINI_MODEL = "gemini-2.0-flash"
                 continue
             return None, "Model AI không khả dụng."
 
