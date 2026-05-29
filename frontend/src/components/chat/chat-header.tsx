@@ -57,13 +57,10 @@ export function ChatHeader({ user, isBotChat }: ChatHeaderProps) {
               {isBotChat ? <Bot className="size-5" /> : initial}
             </AvatarFallback>
           </Avatar>
-          {!isBotChat && (
+          {!isBotChat && isOnline && (
             <span
-              aria-label={isOnline ? "online" : "offline"}
-              className={cn(
-                "absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-card",
-                isOnline ? "bg-success" : "bg-muted-foreground/40",
-              )}
+              aria-label="online"
+              className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-card bg-success"
             />
           )}
         </Link>
@@ -75,20 +72,12 @@ export function ChatHeader({ user, isBotChat }: ChatHeaderProps) {
                 AI · Gemini
               </Badge>
             ) : (
-              <span
-                className={cn(
-                  "inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider",
-                  isOnline ? "text-success" : "text-muted-foreground",
-                )}
-              >
-                <span
-                  className={cn(
-                    "h-1.5 w-1.5 rounded-full",
-                    isOnline ? "bg-success" : "bg-muted-foreground/40",
-                  )}
-                />
-                {isOnline ? "Active now" : null}
-              </span>
+              {isOnline && (
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-success">
+                  <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                  Active now
+                </span>
+              )}
             )}
           </div>
         </div>
