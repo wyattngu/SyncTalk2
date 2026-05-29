@@ -2,7 +2,7 @@
 
 SyncTalk là ứng dụng mạng xã hội nội bộ được xây dựng theo mô hình full-stack, kết hợp diễn đàn thảo luận (Threads), nhắn tin trực tiếp (Direct Messages) và trợ lý AI (SyncBot) hoạt động thời gian thực.
 
-**Demo:** https://synctalk-frontend-qaiz.onrender.com  
+**Demo:** https://synctalk-frontend-ky7f.onrender.com  
 Tài khoản thử: `alice@synctalk.dev` / `Password123!`
 
 ---
@@ -29,11 +29,28 @@ Tài khoản thử: `alice@synctalk.dev` / `Password123!`
 
 ## Chạy local
 
+### Chỉ chạy frontend (đơn giản nhất)
+
+Không cần cài backend hay database — frontend tự trỏ vào server Render có sẵn:
+
+```bash
+git clone https://github.com/wyattngu/SyncTalk2.git
+cd SyncTalk2/frontend
+npm install
+npm run dev
+```
+
+Mở trình duyệt vào **http://localhost:4000** — AI và data có sẵn luôn.
+
+---
+
+### Chạy đầy đủ (frontend + backend)
+
 Yêu cầu: Node.js 20+, Python 3.12+, PostgreSQL đang chạy local.
 
 ```bash
-git clone https://github.com/wyattngu/SyncTalk.git
-cd SyncTalk
+git clone https://github.com/wyattngu/SyncTalk2.git
+cd SyncTalk2
 ```
 
 **1. Tạo database PostgreSQL**
@@ -111,7 +128,6 @@ SyncTalk/
 │   ├── run.py
 │   ├── start.sh
 │   ├── requirements.txt
-│   └── Dockerfile
 ├── frontend/
 │   └── src/
 │       ├── app/
@@ -121,7 +137,6 @@ SyncTalk/
 │       ├── lib/
 │       ├── types/
 │       └── constants/
-├── docker-compose.yml
 └── render.yaml
 ```
 
