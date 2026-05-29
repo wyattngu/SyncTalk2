@@ -6,9 +6,7 @@ import axios, {
 import Cookies from 'js-cookie'
 import { apiPaths } from '@/constants/api-paths'
 
-export function createBrowserApiClient(
-  getToken?: () => Promise<string | null>
-): AxiosInstance {
+export function createBrowserApiClient(): AxiosInstance {
     const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://synctalk-backend-ky7f.onrender.com";
 
     const client = axios.create({
@@ -84,7 +82,7 @@ export async function apiDelete<TResponse>(
     return res.data.data
 }
 
-const browserClient = createBrowserApiClient(() => Promise.resolve(null))
+const browserClient = createBrowserApiClient()
 export default browserClient
 
 export async function getAIChatHistory(): Promise<Array<{ id: string; role: 'user' | 'assistant'; content: string; created_at: string }>> {

@@ -1,14 +1,11 @@
-import os
-import google.generativeai as genai
 from app.services.message_service import MessageService
 from app.repositories.user_repository import UserRepository
+from app.utils.ai_helper import generate_with_retry
 
 class AIService:
     def __init__(self):
         self.message_service = MessageService()
         self.user_repo = UserRepository()
-        self.model_name = "gemini-2.5-flash" # Use flash for fast and free usage
-        self.model = None
 
     def get_or_create_ai_user(self):
         # Find user with username 'SyncBot'
@@ -29,29 +26,16 @@ class AIService:
         return bot
 
     def generate_response(self, sender_id, receiver_id, history_messages):
-        if not self.model:
-            from dotenv import load_dotenv
-            load_dotenv() # Force reload .env
-            api_key = os.environ.get("GEMINI_API_KEY")
-            if api_key:
-                genai.configure(api_key=api_key)
-                self.model = genai.GenerativeModel(self.model_name)
-            else:
-                return "Xin lỗi, hệ thống chưa cấu hình GEMINI_API_KEY để tôi có thể hoạt động."
+        prompt = "Bạn là SyncBot, một trợ lý AI hữu ích và thân thiện trên ứng dụng chat SyncTalk. Hãy trả lời ngắn gọn, tự nhiên và bằng tiếng Việt.\n\nNgữ cảnh cuộc trò chuyện gần đây:\n"
+        for msg in history_messages:
+            author_name = msg.sender.username if msg.sender else "Unknown"
+            prompt += f"{author_name}: {msg.content}\n"
+        prompt += "\nSyncBot:"
 
-        try:
-            # Build conversation history
-            prompt = "Bạn là SyncBot, một trợ lý AI hữu ích và thân thiện trên ứng dụng chat SyncTalk. Hãy trả lời ngắn gọn, tự nhiên và bằng tiếng Việt.\n\nNgữ cảnh cuộc trò chuyện gần đây:\n"
-            for msg in history_messages:
-                author_name = msg.sender.username if msg.sender else "Unknown"
-                prompt += f"{author_name}: {msg.content}\n"
-            
-            prompt += "\nSyncBot:"
-
-            response = self.model.generate_content(prompt)
-            return response.text
-        except Exception:
+        text, err = generate_with_retry(prompt)
+        if err or not text:
             return "Xin lỗi, tôi gặp lỗi khi xử lý yêu cầu của bạn lúc này."
+        return text
 
     def process_ai_mention(self, sender_id, receiver_id, content, socketio, app, is_bot_chat=False):
         """

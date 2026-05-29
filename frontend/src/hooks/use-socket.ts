@@ -11,7 +11,6 @@ interface UseSocketResult {
 }
 
 let socketInstance: Socket | null = null;
-let listenersCount = 0;
 
 export function useSocket(): UseSocketResult {
   const { token, isAuthenticated } = useAuthStore();
