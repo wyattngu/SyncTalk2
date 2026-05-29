@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { SmilePlus } from "lucide-react";
 import { useReactions } from "@/hooks/use-reactions";
 import type { ReactionTargetType } from "@/services/reactions";
@@ -18,6 +18,15 @@ export function ReactionBar({ targetType, targetId }: ReactionBarProps) {
     targetId
   );
   const [pickerOpen, setPickerOpen] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const [pickerPos, setPickerPos] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    if (pickerOpen && btnRef.current) {
+      const rect = btnRef.current.getBoundingClientRect();
+      setPickerPos({ top: rect.bottom + 4, left: rect.left });
+    }
+  }, [pickerOpen]);
 
   return (
     <div className="flex flex-wrap items-center gap-1.5">
@@ -42,6 +51,7 @@ export function ReactionBar({ targetType, targetId }: ReactionBarProps) {
 
       <div className="relative">
         <button
+          ref={btnRef}
           onClick={() => setPickerOpen((v) => !v)}
           className="grid h-7 w-7 place-items-center rounded-full border border-dashed border-border text-muted-foreground transition-colors hover:border-primary/40 hover:bg-primary-soft hover:text-primary"
           aria-label="Add reaction"
@@ -57,7 +67,10 @@ export function ReactionBar({ targetType, targetId }: ReactionBarProps) {
               onClick={() => setPickerOpen(false)}
               aria-label="Close picker"
             />
-            <div className="absolute left-0 top-9 z-40 flex gap-1 rounded-xl border border-border bg-card p-2 shadow-lg">
+            <div
+              className="fixed z-40 flex gap-1 rounded-xl border border-border bg-card p-2 shadow-lg"
+              style={{ top: pickerPos.top, left: pickerPos.left }}
+            >
               {EMOJIS.map((e) => (
                 <button
                   key={e}
