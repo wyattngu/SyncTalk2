@@ -29,77 +29,9 @@ Tài khoản thử: `alice@synctalk.dev` / `Password123!`
 
 ## Chạy local
 
-### Chỉ chạy frontend (đơn giản nhất)
+Yêu cầu: **Node.js 20+**
 
-Không cần cài backend hay database — frontend tự trỏ vào server Render có sẵn:
-
-```bash
-git clone https://github.com/wyattngu/SyncTalk2.git
-cd SyncTalk2/frontend
-npm install
-npm run dev
-```
-
-Mở trình duyệt vào **http://localhost:4000** — AI và data có sẵn luôn.
-
----
-
-### Chạy đầy đủ (frontend + backend)
-
-Yêu cầu: Node.js 20+, Python 3.12+, PostgreSQL đang chạy local.
-
-```bash
-git clone https://github.com/wyattngu/SyncTalk2.git
-cd SyncTalk2
-```
-
-**1. Tạo database PostgreSQL**
-
-Mở terminal, đăng nhập PostgreSQL rồi chạy:
-
-```bash
-psql -U postgres
-```
-
-```sql
-CREATE DATABASE "SyncTalk";
-\q
-```
-
-**2. Chạy backend**
-
-```bash
-cd backend
-pip install -r requirements.txt
-```
-
-Tạo file `backend/.env`:
-
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=SyncTalk
-DB_USER=postgres
-DB_PASSWORD=your_password
-SECRET_KEY=your_secret_key
-JWT_SECRET_KEY=your_jwt_secret
-GEMINI_API_KEY=your_gemini_key
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
-
-Khởi tạo bảng database (chỉ cần chạy một lần lần đầu):
-
-```bash
-python -c "from app import create_app, db; app=create_app(); app.app_context().push(); db.create_all()"
-```
-
-```bash
-python run.py
-```
-
-**3. Chạy frontend** (mở terminal mới)
+Giải nén file ZIP, mở terminal trong thư mục vừa giải nén rồi chạy:
 
 ```bash
 cd frontend
@@ -108,6 +40,8 @@ npm run dev
 ```
 
 Mở trình duyệt vào **http://localhost:4000**
+
+> Frontend tự kết nối vào server backend có sẵn — không cần cài thêm gì, data và AI hoạt động ngay.
 
 ---
 
