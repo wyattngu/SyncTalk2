@@ -236,12 +236,9 @@ function ConversationRow({
             {isBot ? <Bot className="size-5" /> : c.username[0]?.toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <span
-          className={cn(
-            "absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-card",
-            c.is_online ? "bg-success" : "bg-muted-foreground/40",
-          )}
-        />
+        {c.is_online && (
+          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-card bg-success" />
+        )}
       </div>
 
       <div className="min-w-0 flex-1">
