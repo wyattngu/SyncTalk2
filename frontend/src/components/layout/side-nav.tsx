@@ -95,7 +95,7 @@ export function SideNav() {
       {/* Footer — support only; profile + sign out are in the avatar dropdown */}
       <div className="mt-auto flex flex-col gap-1 border-t border-border pt-4">
         <a
-          href="https://github.com/anthropics/claude-code/issues"
+          href="https://github.com/wyattngu/SyncTalk2/issues"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-container-low hover:text-foreground"
