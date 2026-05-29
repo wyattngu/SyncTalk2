@@ -258,7 +258,6 @@ function ConversationRow({
               </Badge>
             )}
           </h4>
-          <span className="shrink-0 text-xs text-muted-foreground">{time}</span>
         </div>
         <div className="mt-0.5 flex items-center justify-between gap-2">
           <p
