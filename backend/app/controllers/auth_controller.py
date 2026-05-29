@@ -131,21 +131,21 @@ def get_users_with_status(current_user):
 
     def format_last_seen(last_seen):
         if not last_seen:
-            return 'Không rõ'
+            return 'Unknown'
         now = datetime.now(timezone.utc)
         if last_seen.tzinfo is None:
             last_seen = last_seen.replace(tzinfo=timezone.utc)
         diff = now - last_seen
         minutes = int(diff.total_seconds() / 60)
         if minutes < 1:
-            return 'Vừa xong'
+            return 'Just now'
         if minutes < 60:
-            return f'{minutes} phút trước'
+            return f'{minutes}m ago'
         hours = minutes // 60
         if hours < 24:
-            return f'{hours} giờ trước'
+            return f'{hours}h ago'
         days = hours // 24
-        return f'{days} ngày trước'
+        return f'{days}d ago'
 
     return success_response(
         data=[{

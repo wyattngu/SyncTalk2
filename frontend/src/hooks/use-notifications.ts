@@ -48,11 +48,11 @@ export function useNotifications() {
       const type = n.type?.toLowerCase();
       const msg = n.message?.toLowerCase();
 
-      if (type === "friend_request" || msg.includes("friend request")) {
+      if (type === "friend_request" || msg?.includes("friend request")) {
         router.push("/friends?tab=incoming");
-      } else if (type === "friend_accept" || msg.includes("friend request was accepted")) {
+      } else if (type === "friend_accept" || msg?.includes("friend request was accepted")) {
         router.push("/friends");
-      } else if (type === "message" || msg.includes("new message")) {
+      } else if (type === "message" || msg?.includes("new message")) {
         router.push(`/chat?userId=${n.reference_id}`);
       } else if (n.reference_id) {
         router.push(`/threads/${n.reference_id}`);

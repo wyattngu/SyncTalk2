@@ -8,10 +8,6 @@ from app.sockets.presence_manager import presence_manager
 
 auth_service = AuthService()
 
-@socketio.on('connect')
-def on_connect():
-    pass
-
 @socketio.on('authenticate')
 def on_authenticate(data):
     """Event for user to identify themselves with a token."""
@@ -37,3 +33,4 @@ def on_disconnect():
     user_id = session.get('user_id')
     if user_id:
         presence_manager.remove_connection(user_id, request.sid)
+        socketio.emit('user_offline', {'user_id': user_id})

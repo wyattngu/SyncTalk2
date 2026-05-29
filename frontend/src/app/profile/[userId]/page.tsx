@@ -316,7 +316,7 @@ export default function PublicProfilePage() {
                       {t.like_count}
                     </span>
                     <span className="ml-auto">
-                      {new Date(t.created_at).toLocaleDateString("vi-VN", {
+                      {new Date(t.created_at).toLocaleDateString("en-GB", {
                         day: "2-digit",
                         month: "2-digit",
                         year: "numeric",
