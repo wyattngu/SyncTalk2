@@ -44,7 +44,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: FRONTEND_URL
-        sync: false
+        value: https://synctalk-frontend-ky7f.onrender.com
 
   - type: web
     name: synctalk-frontend
