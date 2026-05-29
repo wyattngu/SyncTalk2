@@ -1,37 +1,37 @@
 # SyncTalk
 
-SyncTalk là ứng dụng mạng xã hội nội bộ được xây dựng theo mô hình full-stack, kết hợp diễn đàn thảo luận (Threads), nhắn tin trực tiếp (Direct Messages) và trợ lý AI (SyncBot) hoạt động thời gian thực.
+SyncTalk is a full-stack internal social platform combining a discussion forum (Threads), real-time direct messaging, and an AI assistant (SyncBot).
 
-**Demo:** https://synctalk-frontend-ky7f.onrender.com  
-Tài khoản thử: `alice@synctalk.dev` / `Password123!`
-
----
-
-## Tính năng chính
-
-- Đăng thread với tag, markdown, hình ảnh — có thể like, react, reply và @mention
-- Nhắn tin trực tiếp 1-1 thời gian thực, hỗ trợ gửi ảnh
-- Chat với SyncBot (AI Assistant dùng Google Gemini) qua widget nổi hoặc tin nhắn trực tiếp
-- Hệ thống bạn bè: gửi/chấp nhận/từ chối lời mời
-- Thông báo realtime khi có reaction, reply, mention, lời mời kết bạn
-- Hiển thị trạng thái online/offline theo thời gian thực
-- Tìm kiếm thread bằng ngôn ngữ tự nhiên (Semantic Search với AI)
+**Live Demo:** https://synctalk-frontend-ky7f.onrender.com  
+Demo account: `alice@synctalk.dev` / `Password123!`
 
 ---
 
-## Công nghệ sử dụng
+## Features
+
+- Post threads with tags, markdown, and images — supports likes, reactions, replies, and @mentions
+- Real-time 1-on-1 direct messaging with image support
+- Chat with SyncBot (AI Assistant powered by Google Gemini) via floating widget or direct message
+- Friend system: send, accept, and decline friend requests
+- Real-time notifications for reactions, replies, mentions, and friend requests
+- Live online/offline presence indicators
+- Natural language thread search (Semantic Search with AI)
+
+---
+
+## Tech Stack
 
 **Backend:** Python 3.12, Flask, Flask-SocketIO, PostgreSQL, SQLAlchemy  
 **Frontend:** Next.js 16, React 19, TypeScript, Tailwind CSS v4, Zustand  
-**Khác:** Socket.IO (realtime), JWT (xác thực), Cloudinary (lưu ảnh), Google Gemini API (AI)
+**Other:** Socket.IO (real-time), JWT (auth), Cloudinary (image storage), Google Gemini API (AI)
 
 ---
 
-## Chạy local
+## Running Locally
 
-Yêu cầu: **Node.js 20+**
+**Requirement:** Node.js 20+
 
-Giải nén file ZIP, mở terminal trong thư mục vừa giải nén rồi chạy:
+Extract the ZIP file, open a terminal in the extracted folder, then run:
 
 ```bash
 cd frontend
@@ -39,13 +39,13 @@ npm install
 npm run dev
 ```
 
-Mở trình duyệt vào **http://localhost:4000**
+Open your browser at **http://localhost:4000**
 
-> Frontend tự kết nối vào server backend có sẵn — không cần cài thêm gì, data và AI hoạt động ngay.
+> The frontend automatically connects to the hosted backend — no additional setup needed. Data and AI are available immediately.
 
 ---
 
-## Cấu trúc dự án
+## Project Structure
 
 ```
 SyncTalk/
@@ -61,7 +61,7 @@ SyncTalk/
 │   ├── seed.py
 │   ├── run.py
 │   ├── start.sh
-│   ├── requirements.txt
+│   └── requirements.txt
 ├── frontend/
 │   └── src/
 │       ├── app/
@@ -76,25 +76,25 @@ SyncTalk/
 
 ---
 
-## Deploy lên Render
+## Deploying to Render
 
-Trong repo đã có sẵn file `render.yaml` cấu hình đầy đủ 3 services (backend, frontend, PostgreSQL).
+The repo includes a `render.yaml` file that configures all 3 services (backend, frontend, PostgreSQL).
 
-1. Push code lên GitHub
-2. Vào [render.com](https://render.com) → **New** → **Blueprint** → chọn repo
-3. Điền 2 biến môi trường khi được yêu cầu: `GEMINI_API_KEY` và `CLOUDINARY_API_SECRET`
-4. Nhấn **Apply**, Render sẽ tự build và deploy
+1. Push code to GitHub
+2. Go to [render.com](https://render.com) → **New** → **Blueprint** → select your repo
+3. Fill in 2 environment variables when prompted: `GEMINI_API_KEY` and `CLOUDINARY_API_SECRET`
+4. Click **Apply** — Render will build and deploy automatically
 
 ---
 
-## Biến môi trường backend
+## Backend Environment Variables
 
-| Biến | Mô tả |
-|------|-------|
-| `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | Thông tin kết nối PostgreSQL |
+| Variable | Description |
+|----------|-------------|
+| `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | PostgreSQL connection details |
 | `SECRET_KEY` | Flask secret key |
-| `JWT_SECRET_KEY` | Dùng để ký JWT token |
-| `JWT_ACCESS_TOKEN_EXPIRES` | Thời hạn token tính bằng giây, mặc định 3600 |
+| `JWT_SECRET_KEY` | Used to sign JWT tokens |
+| `JWT_ACCESS_TOKEN_EXPIRES` | Token expiry in seconds, default 3600 |
 | `GEMINI_API_KEY` | Google Gemini API key |
-| `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Cloudinary để lưu ảnh |
-| `FRONTEND_URL` | URL frontend, dùng cho cấu hình CORS |
+| `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Cloudinary for image storage |
+| `FRONTEND_URL` | Frontend URL used for CORS configuration |
