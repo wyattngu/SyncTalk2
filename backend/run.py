@@ -73,8 +73,18 @@ def auto_seed_if_empty():
         print(f'[auto-seed] Seeding failed: {e}', file=sys.stderr)
 
 
+def reset_online_status():
+    with app.app_context():
+        try:
+            from app.models import User
+            User.query.update({User.is_online: False})
+            db.session.commit()
+        except Exception:
+            pass
+
 # Run at import time so it fires under both `python run.py` and any WSGI
 # server that imports `app` from this module.
+reset_online_status()
 auto_seed_if_empty()
 
 if __name__ == '__main__':
